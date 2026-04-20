@@ -65,8 +65,8 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `Dockerfile` | Multi-stage conda build (unified image) |
-| ⬜ pending | `README.md` | Full usage documentation |
+| ✅ done | `Dockerfile` | Multi-stage conda build (unified image) |
+| ✅ done | `README.md` | Full usage documentation |
 
 ---
 
@@ -74,15 +74,16 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `tests/conftest.py` | Fixtures (synthetic HDF5, NC, mock MAAP) |
-| ⬜ pending | `tests/test_stac_utils.py` | STAC generation unit tests |
-| ⬜ pending | `tests/test_file_utils.py` | Metadata extraction unit tests |
+| ✅ done | `tests/conftest.py` | Fixtures (synthetic HDF5, NC, mock MAAP) |
+| ✅ done | `tests/test_stac_utils.py` | STAC generation unit tests |
+| ✅ done | `tests/test_file_utils.py` | Metadata extraction unit tests |
 
 ---
 
 ## Validation Checklist
 
 - [ ] `python -c "from maap_data_downloaders.stac_utils import create_stac_item"` exits 0
+- [ ] `pytest tests/ -v` all tests pass
 - [ ] `cwltool --validate nasa_daac/process.cwl` passes
 - [ ] `cwltool --validate sftp/process.cwl` passes
 - [ ] `cwltool --validate http_download/process.cwl` passes
