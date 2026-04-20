@@ -21,10 +21,10 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `nasa_daac/main.py` | CLI: earthaccess search + download + STAC |
-| ⬜ pending | `nasa_daac/process.cwl` | OGC Application Package CWL v1.2 |
-| ⬜ pending | `nasa_daac/run_nasa_daac.sh` | MAAP wrapper (conda activate → secrets → CLI) |
-| ⬜ pending | `nasa_daac/examples/basic.yml` | Example CWL inputs |
+| ✅ done | `nasa_daac/main.py` | CLI: earthaccess search + download + STAC |
+| ✅ done | `nasa_daac/process.cwl` | OGC Application Package CWL v1.2 |
+| ✅ done | `nasa_daac/run_nasa_daac.sh` | MAAP wrapper (conda activate → secrets → CLI) |
+| ✅ done | `nasa_daac/examples/basic.yml` | Example CWL inputs |
 
 ---
 
@@ -32,10 +32,10 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `sftp/main.py` | CLI: paramiko SFTP transfer + STAC |
-| ⬜ pending | `sftp/process.cwl` | OGC Application Package CWL v1.2 |
-| ⬜ pending | `sftp/run_sftp.sh` | MAAP wrapper |
-| ⬜ pending | `sftp/examples/basic.yml` | Example CWL inputs |
+| ✅ done | `sftp/main.py` | CLI: paramiko SFTP transfer + STAC |
+| ✅ done | `sftp/process.cwl` | OGC Application Package CWL v1.2 |
+| ✅ done | `sftp/run_sftp.sh` | MAAP wrapper |
+| ✅ done | `sftp/examples/basic.yml` | Example CWL inputs |
 
 ---
 
@@ -43,10 +43,10 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `http_download/main.py` | CLI: requests HTTP download + STAC |
-| ⬜ pending | `http_download/process.cwl` | OGC Application Package CWL v1.2 |
-| ⬜ pending | `http_download/run_http.sh` | MAAP wrapper |
-| ⬜ pending | `http_download/examples/basic.yml` | Example CWL inputs |
+| ✅ done | `http_download/main.py` | CLI: requests HTTP download + STAC |
+| ✅ done | `http_download/process.cwl` | OGC Application Package CWL v1.2 |
+| ✅ done | `http_download/run_http.sh` | MAAP wrapper |
+| ✅ done | `http_download/examples/basic.yml` | Example CWL inputs |
 
 ---
 
@@ -54,10 +54,10 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 
 | Status | File | Description |
 |--------|------|-------------|
-| ⬜ pending | `opendap/main.py` | CLI: xarray OPeNDAP access + subset + STAC |
-| ⬜ pending | `opendap/process.cwl` | OGC Application Package CWL v1.2 |
-| ⬜ pending | `opendap/run_opendap.sh` | MAAP wrapper |
-| ⬜ pending | `opendap/examples/basic.yml` | Example CWL inputs |
+| ✅ done | `opendap/main.py` | CLI: xarray OPeNDAP access + subset + STAC |
+| ✅ done | `opendap/process.cwl` | OGC Application Package CWL v1.2 |
+| ✅ done | `opendap/run_opendap.sh` | MAAP wrapper |
+| ✅ done | `opendap/examples/basic.yml` | Example CWL inputs |
 
 ---
 

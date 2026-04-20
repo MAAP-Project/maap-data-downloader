@@ -1,0 +1,5 @@
+# Example: Download a public NetCDF file via HTTP (no auth)
+url: "https://www.unidata.ucar.edu/software/netcdf/examples/sresa1b_ncar_ccsm3-example.nc"
+auth_type: "none"
+collection_id: "unidata-netcdf-example"
+verbose: true

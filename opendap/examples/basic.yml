@@ -1,0 +1,9 @@
+# Example: Subset COADS climatology from a public OPeNDAP THREDDS server
+url: "https://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GFS/Global_0p25deg/TwoD"
+variables: "Temperature_surface"
+bbox: "-125,24,-66,49"                       # CONUS
+temporal_start: "2020-01-01"
+temporal_end: "2020-01-31"
+chunks: '{"time": 1}'
+collection_id: "gfs-temperature-conus"
+verbose: true

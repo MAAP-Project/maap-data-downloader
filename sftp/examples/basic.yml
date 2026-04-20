@@ -1,0 +1,8 @@
+# Example: Download data from a public demo SFTP server
+host: "demo.wftpserver.com"
+remote_path: "/download/Winter%20Landscape.jpg"
+port: 2222
+username_secret: "SFTP_USERNAME"             # MAAP secret name
+password_secret: "SFTP_PASSWORD"             # MAAP secret name
+collection_id: "sftp-demo-download"
+verbose: true
