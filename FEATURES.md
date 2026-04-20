@@ -10,10 +10,10 @@ Status key: `⬜ pending` | `🔄 in progress` | `✅ done`
 |--------|------|-------------|
 | ✅ done | `environment.yaml` | Conda env `maap-downloader` with all shared deps |
 | ✅ done | `pyproject.toml` | Package metadata for `pip install -e .` |
-| 🔄 in progress | `src/maap_data_downloaders/__init__.py` | Package init |
-| 🔄 in progress | `src/maap_data_downloaders/auth.py` | MAAP secrets + ~/.netrc writer |
-| ⬜ pending | `src/maap_data_downloaders/file_utils.py` | HDF5/NetCDF metadata extraction |
-| ⬜ pending | `src/maap_data_downloaders/stac_utils.py` | pystac Item/Collection/Catalog builder |
+| ✅ done | `src/maap_data_downloaders/__init__.py` | Package init |
+| ✅ done | `src/maap_data_downloaders/auth.py` | MAAP secrets + ~/.netrc writer |
+| ✅ done | `src/maap_data_downloaders/file_utils.py` | HDF5/NetCDF metadata extraction |
+| ✅ done | `src/maap_data_downloaders/stac_utils.py` | pystac Item/Collection/Catalog builder |
 
 ---
 
