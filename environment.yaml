@@ -1,0 +1,19 @@
+name: maap-downloader
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - earthaccess>=0.9
+  - pystac>=1.10
+  - xarray
+  - h5py
+  - netCDF4
+  - paramiko
+  - requests
+  - rasterio
+  - dask
+  - pydap
+  - shapely
+  - pip:
+      - maap-py
