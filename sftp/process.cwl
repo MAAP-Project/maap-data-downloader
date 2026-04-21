@@ -57,7 +57,7 @@ $graph:
         type: int?
         default: 22
         label: SFTP Port
-        doc: SSH port (default: 22).
+        doc: "SSH port (default: 22)."
 
       username_secret:
         type: string?
