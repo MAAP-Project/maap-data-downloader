@@ -1,0 +1,4 @@
+.claude/
+src/maap_data_downloaders.egg-info/
+*.pyc
+output/
