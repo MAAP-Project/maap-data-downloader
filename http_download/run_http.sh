@@ -6,22 +6,22 @@
 # ==============================================================================
 set -euo pipefail
 
-source activate maap-downloader
+if [ -f /opt/conda/etc/profile.d/conda.sh ]; then
+    source /opt/conda/etc/profile.d/conda.sh
+fi
+conda activate maap-downloader
 
 echo "[run_http] Starting HTTP downloader"
 
-# ---------------------------------------------------------------------------
-# Step 1: Create output directory
-# ---------------------------------------------------------------------------
-mkdir -p "${PWD}/outputs"
-export HOME=/home/ops
+export HOME=/root
 
-# ---------------------------------------------------------------------------
-# Step 2: Invoke Python CLI
+# Capture output path before cd /app so CWL's `glob: outputs` resolves correctly.
+OUT_DIR="${PWD}/outputs"
+mkdir -p "$OUT_DIR"
+
 # Auth credentials (if needed) are retrieved inside Python via maap-py secrets.
-# ---------------------------------------------------------------------------
 cd /app
-python -m http_download.main --output "${PWD}/outputs" "$@"
+python -m http_download.main --output "$OUT_DIR" "$@"
 
 echo "[run_http] Complete. Output directory:"
-ls -lh "${PWD}/outputs/" 2>/dev/null || true
+ls -lh "$OUT_DIR/" 2>/dev/null || true
