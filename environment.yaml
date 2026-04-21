@@ -1,7 +1,6 @@
 name: maap-downloader
 channels:
   - conda-forge
-  - defaults
 dependencies:
   - python=3.11
   - earthaccess>=0.9

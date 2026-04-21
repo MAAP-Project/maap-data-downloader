@@ -27,7 +27,7 @@ COPY --from=builder /opt/conda/envs/maap-downloader /opt/conda/envs/maap-downloa
 
 ENV PATH="/opt/conda/envs/maap-downloader/bin:$PATH"
 ENV CONDA_DEFAULT_ENV="maap-downloader"
-ENV PYTHONPATH="/app:${PYTHONPATH}"
+ENV PYTHONPATH="/app"
 ENV PYTHONUNBUFFERED="1"
 
 WORKDIR /app
