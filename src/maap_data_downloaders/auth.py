@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 import stat
 from pathlib import Path
 
@@ -12,9 +11,13 @@ def get_maap_secret(secret_name: str) -> str:
     from maap.maap import MAAP  # type: ignore[import]
     maap = MAAP()
     value = maap.secrets.get_secret(secret_name)
+    if isinstance(value, dict):
+        code = value.get("code", "unknown")
+        msg = value.get("message", str(value))
+        raise RuntimeError(f"MAAP secret '{secret_name}' could not be retrieved (HTTP {code}): {msg}")
     if not value:
         raise RuntimeError(f"MAAP secret '{secret_name}' is empty or not found.")
-    return value
+    return str(value)
 
 
 def get_earthdata_credentials(
@@ -25,6 +28,11 @@ def get_earthdata_credentials(
     username = get_maap_secret(username_secret)
     password = get_maap_secret(password_secret)
     return username, password
+
+
+def get_earthdata_token(token_secret: str = "EARTHDATA_TOKEN") -> str:
+    """Retrieve Earthdata bearer token from MAAP secrets vault."""
+    return get_maap_secret(token_secret)
 
 
 def write_netrc(username: str, password: str, host: str = "urs.earthdata.nasa.gov") -> None:
