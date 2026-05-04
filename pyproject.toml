@@ -6,7 +6,21 @@ build-backend = "setuptools.build_meta"
 name = "maap-data-downloaders"
 version = "1.0.0"
 description = "OGC Application Package collection for downloading scientific data in NASA MAAP"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
+dependencies = [
+    "earthaccess>=0.9",
+    "pystac>=1.10",
+    "xarray",
+    "h5py",
+    "netCDF4",
+    "paramiko",
+    "requests",
+    "rasterio",
+    "dask",
+    "pydap",
+    "shapely",
+    "maap-py @ git+https://github.com/MAAP-Project/maap-py.git@develop",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

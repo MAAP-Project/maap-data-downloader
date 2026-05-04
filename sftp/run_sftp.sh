@@ -6,11 +6,6 @@
 # ==============================================================================
 set -euo pipefail
 
-if [ -f /opt/conda/etc/profile.d/conda.sh ]; then
-    source /opt/conda/etc/profile.d/conda.sh
-fi
-conda activate maap-downloader
-
 echo "[run_sftp] Starting SFTP downloader"
 
 export HOME=/root

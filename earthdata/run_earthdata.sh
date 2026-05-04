@@ -5,11 +5,6 @@
 # ==============================================================================
 set -euo pipefail
 
-if [ -f /opt/conda/etc/profile.d/conda.sh ]; then
-    source /opt/conda/etc/profile.d/conda.sh
-fi
-conda activate maap-downloader
-
 echo "[run_earthdata] Starting Earthdata downloader"
 
 # HOME must be set before any Python call that resolves Path.home().
