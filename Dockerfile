@@ -18,7 +18,7 @@ FROM condaforge/miniforge3:25.11.0-0
 
 LABEL maintainer="MAAP Team <support@maap-project.org>"
 LABEL version="1.0.0"
-LABEL description="MAAP Data Downloaders - OGC Application Packages (NASA DAAC, SFTP, HTTP, OPeNDAP)"
+LABEL description="MAAP Data Downloaders - OGC Application Packages (Earthdata, SFTP, HTTP, OPeNDAP)"
 LABEL org.opencontainers.image.source="https://github.com/MAAP-Project/maap-data-downloaders"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL org.opencontainers.image.title="maap-data-downloaders"
@@ -34,12 +34,12 @@ WORKDIR /app
 
 COPY src/ /app/src/
 COPY pyproject.toml /app/
-COPY nasa_daac/ /app/nasa_daac/
+COPY earthdata/ /app/earthdata/
 COPY sftp/ /app/sftp/
 COPY http_download/ /app/http_download/
 COPY opendap/ /app/opendap/
 
-RUN chmod +x /app/nasa_daac/run_*.sh \
+RUN chmod +x /app/earthdata/run_*.sh \
               /app/sftp/run_*.sh \
               /app/http_download/run_*.sh \
               /app/opendap/run_*.sh && \

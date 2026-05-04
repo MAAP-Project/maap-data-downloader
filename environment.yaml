@@ -15,4 +15,4 @@ dependencies:
   - pydap
   - shapely
   - pip:
-      - maap-py
+      - git+https://github.com/MAAP-Project/maap-py.git@develop

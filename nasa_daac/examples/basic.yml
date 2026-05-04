@@ -1,7 +1,0 @@
-# Example: Download MERRA-2 data for CONUS in January 2020
-concept_id: "C1276812812-GES_DISC"          # MERRA-2 inst1_2d_asm_Nx
-bbox: "-125,24,-66,49"                       # CONUS bounding box
-temporal_start: "2020-01-01"
-temporal_end: "2020-01-31"
-collection_id: "merra2-conus-jan2020"
-verbose: false

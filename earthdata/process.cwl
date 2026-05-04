@@ -1,7 +1,7 @@
 cwlVersion: v1.2
 
 # ==============================================================================
-# MAAP NASA DAAC Downloader - OGC Application Package
+# MAAP Earthdata Downloader - OGC Application Package
 # ==============================================================================
 
 $namespaces:
@@ -28,25 +28,34 @@ $graph:
   # ============================================================================
 
   - class: Workflow
-    id: maap-nasa-daac-downloader
-    label: MAAP NASA DAAC Downloader
+    id: maap-earthdata-downloader
+    label: MAAP Earthdata Downloader
 
     doc: |
-      Downloads granules from any NASA DAAC using earthaccess (CMR search).
-      Authentication is handled via MAAP secrets vault (EARTHDATA_USERNAME /
-      EARTHDATA_PASSWORD). Produces data files and a STAC metadata catalog.
+      Downloads granules from Earthdata using MAAP search capabilities.
+      Supports search by CMR short name or concept ID with spatial and temporal filtering.
+      Produces data files and a STAC metadata catalog.
 
-      Inputs: CMR concept_id + bounding box + optional temporal range.
+      Inputs: Short name or concept ID + bounding box + optional temporal range.
       Outputs: data files in outputs/data/ + STAC catalog at outputs/catalog.json.
 
     inputs:
 
+      short_name:
+        type: string?
+        label: CMR Short Name
+        doc: |
+          NASA CMR collection short name identifying the dataset.
+          Example: GEDI02_A, MERRA2, GPM_3IMERGHH
+          Find short names at: https://cmr.earthdata.nasa.gov/search/collections
+
       concept_id:
-        type: string
+        type: string?
         label: CMR Concept ID
         doc: |
           NASA CMR concept ID identifying the dataset collection.
-          Example: C2036882064-GES_DISC (MERRA-2), C2036882063-GES_DISC (GPM)
+          Example: C2036882064-GES_DISC (MERRA-2)
+          Mutually exclusive with short_name.
           Find IDs at: https://cmr.earthdata.nasa.gov/search/collections
 
       bbox:
@@ -73,13 +82,21 @@ $graph:
           Format: YYYY-MM-DD
           Example: 2020-12-31
 
+      limit:
+        type: int?
+        default: 20
+        label: Granule Limit
+        doc: |
+          Maximum number of granules to download.
+          Default: 20
+
       collection_id:
         type: string?
         label: STAC Collection ID
         doc: |
           Identifier for the output STAC collection.
-          If omitted, defaults to the concept_id value.
-          Example: my-merra2-download
+          If omitted, defaults to the short_name or concept_id value.
+          Example: my-gedi-download
 
       verbose:
         type: boolean?
@@ -114,10 +131,12 @@ $graph:
       download_step:
         run: "#main"
         in:
+          short_name: short_name
           concept_id: concept_id
           bbox: bbox
           temporal_start: temporal_start
           temporal_end: temporal_end
+          limit: limit
           collection_id: collection_id
           verbose: verbose
         out: [outputs_result, stac_catalog]
@@ -128,11 +147,11 @@ $graph:
 
   - class: CommandLineTool
     id: main
-    label: NASA DAAC Downloader Tool
+    label: Earthdata Downloader Tool
 
     doc: |
-      Executes the NASA DAAC downloader inside Docker.
-      Credentials are retrieved from MAAP secrets vault at runtime.
+      Executes the Earthdata downloader inside Docker.
+      Uses MAAP API for search and data retrieval.
 
     requirements:
       DockerRequirement:
@@ -153,8 +172,14 @@ $graph:
 
     inputs:
 
+      short_name:
+        type: string?
+        label: CMR Short Name
+        inputBinding:
+          prefix: --short-name
+
       concept_id:
-        type: string
+        type: string?
         label: CMR Concept ID
         inputBinding:
           prefix: --concept-id
@@ -176,6 +201,13 @@ $graph:
         label: Temporal End
         inputBinding:
           prefix: --temporal-end
+
+      limit:
+        type: int?
+        default: 20
+        label: Granule Limit
+        inputBinding:
+          prefix: --limit
 
       collection_id:
         type: string?
@@ -202,5 +234,5 @@ $graph:
         outputBinding:
           glob: outputs/catalog.json
 
-    baseCommand: ["/app/nasa_daac/run_nasa_daac.sh"]
+    baseCommand: ["/app/earthdata/run_earthdata.sh"]
     successCodes: [0]
