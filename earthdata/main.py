@@ -108,7 +108,7 @@ def run(args: argparse.Namespace) -> None:
 
     # Batch download all granules
     try:
-        downloaded_paths = earthaccess.download(results, local_path=str(data_dir))
+        downloaded_paths = earthaccess.download(results, local_path=str(data_dir), show_progress=True, force=True)
     except Exception as exc:
         print(f"[earthdata] ERROR: download failed: {exc}", file=sys.stderr)
         sys.exit(1)
