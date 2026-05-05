@@ -9,6 +9,11 @@ WORKDIR /build
 COPY pyproject.toml .
 COPY src/ src/
 RUN pip install --no-cache-dir --prefix=/install .
+# Fix earthaccess bug: use get_file for single-file downloads (sync) instead of get (async bulk)
+# https://github.com/earthaccess-dev/earthaccess/issues/1331
+RUN sed -i \
+    's/s3_fs\.get(\[file\], str(temp_name), recursive=False)/s3_fs.get_file(file, str(temp_name))/' \
+    /install/lib/python3.12/site-packages/earthaccess/store.py
 
 # ============================================================================
 # Production Stage - Unified image for all four downloaders
