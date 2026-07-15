@@ -36,9 +36,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--output", default="outputs", help="Output directory (default: outputs)")
     p.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     p.add_argument(
+        "--auth-strategy",
+        default="environment",
+        choices=["environment", "netrc", "interactive"],
+        help="Authentication strategy: 'environment' (MAAP secrets), 'netrc' (~/.netrc), or 'interactive' (prompt)",
+    )
+    p.add_argument(
         "--token-secret",
         default="EARTHDATA_TOKEN",
-        help="MAAP secret name for Earthdata token (default: EARTHDATA_TOKEN)",
+        help="MAAP secret name for Earthdata token (only used with --auth-strategy=environment)",
     )
     return p.parse_args(argv)
 
@@ -62,18 +68,20 @@ def run(args: argparse.Namespace) -> None:
     if args.verbose:
         print(f"[earthdata] short_name={args.short_name} concept_id={args.concept_id} bbox={args.bbox}")
 
-    # Auth: get token from MAAP secrets and set env var for earthaccess
+    # Auth: use specified strategy
     try:
-        token = get_earthdata_token(args.token_secret)
+        if args.auth_strategy == "environment":
+            token = get_earthdata_token(args.token_secret)
+            os.environ["EARTHDATA_TOKEN"] = token
+            earthaccess.login(strategy="environment")
+        elif args.auth_strategy == "netrc":
+            earthaccess.login(strategy="netrc")
+        elif args.auth_strategy == "interactive":
+            earthaccess.login(strategy="interactive")
     except Exception as exc:
-        print(f"[earthdata] ERROR: Failed to retrieve token: {exc}", file=sys.stderr)
-        sys.exit(1)
-
-    os.environ["EARTHDATA_TOKEN"] = token
-    try:
-        earthaccess.login(strategy="environment")
-    except Exception as exc:
-        print(f"[earthdata] ERROR: earthaccess login failed: {exc}", file=sys.stderr)
+        print(f"[earthdata] ERROR: Authentication failed: {exc}", file=sys.stderr)
+        if args.auth_strategy == "netrc":
+            print("[earthdata] Make sure ~/.netrc has credentials for urs.earthdata.nasa.gov", file=sys.stderr)
         sys.exit(1)
 
     # Build earthaccess search kwargs
