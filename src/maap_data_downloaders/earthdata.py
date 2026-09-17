@@ -36,6 +36,7 @@ def download_earthdata(
     auth_strategy: str = "environment",
     token_secret: str = "EARTHDATA_TOKEN",
     verbose: bool = False,
+    create_data_subdir: bool = False,
 ) -> list[str]:
     """Search for and download NASA Earthdata granules via CMR, writing a STAC catalog.
 
@@ -51,6 +52,8 @@ def download_earthdata(
         auth_strategy: 'environment' (MAAP secrets), 'netrc' (~/.netrc), or 'interactive' (prompt).
         token_secret: MAAP secret name for Earthdata token (only used with auth_strategy='environment').
         verbose: Enable verbose logging.
+        create_data_subdir: If True, download granules into a 'data' subdirectory of
+            output_dir instead of directly into output_dir.
 
     Returns:
         List of local filesystem paths for the downloaded granules.
@@ -62,7 +65,7 @@ def download_earthdata(
         DownloadError: If the CMR search or download fails.
     """
     output_path = Path(output_dir)
-    data_dir = output_path / "data"
+    data_dir = output_path / "data" if create_data_subdir else output_path
     data_dir.mkdir(parents=True, exist_ok=True)
 
     if collection_id:
