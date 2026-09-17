@@ -37,6 +37,7 @@ def download_earthdata(
     token_secret: str = "EARTHDATA_TOKEN",
     verbose: bool = False,
     create_data_subdir: bool = False,
+    granule_name_pattern: str | None = None,
 ) -> list[str]:
     """Search for and download NASA Earthdata granules via CMR, writing a STAC catalog.
 
@@ -47,6 +48,9 @@ def download_earthdata(
         temporal_start: Start date YYYY-MM-DD (optional).
         temporal_end: End date YYYY-MM-DD (optional).
         limit: Maximum number of granules to fetch.
+        granule_name_pattern: Optional filename pattern (e.g. '*v02_11*') to filter
+            granules at the CMR search level, useful for selecting a single version
+            when a collection has multiple.
         collection_id: STAC collection ID for output catalog (default: short_name or concept_id).
         output_dir: Output directory path.
         auth_strategy: 'environment' (MAAP secrets), 'netrc' (~/.netrc), or 'interactive' (prompt).
@@ -116,6 +120,9 @@ def download_earthdata(
 
     if temporal_start or temporal_end:
         search_kwargs["temporal"] = (temporal_start or "", temporal_end or "")
+
+    if granule_name_pattern:
+        search_kwargs["granule_name"] = granule_name_pattern
 
     try:
         results = earthaccess.search_data(**search_kwargs)
