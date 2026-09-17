@@ -40,6 +40,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="EARTHDATA_TOKEN",
         help="MAAP secret name for Earthdata token (only used with --auth-strategy=environment)",
     )
+    p.add_argument(
+        "--create-data-subdir",
+        action="store_true",
+        help="Download granules into a 'data' subdirectory of --output instead of directly into it",
+    )
     return p.parse_args(argv)
 
 
@@ -58,6 +63,7 @@ def run(args: argparse.Namespace) -> None:
             auth_strategy=args.auth_strategy,
             token_secret=args.token_secret,
             verbose=args.verbose,
+            create_data_subdir=args.create_data_subdir,
         )
     except Exception as exc:
         print(f"[earthdata] ERROR: {exc}", file=sys.stderr)
