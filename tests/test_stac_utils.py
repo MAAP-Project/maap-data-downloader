@@ -2,8 +2,6 @@
 
 import json
 
-import pystac  # type: ignore[import]
-
 from maap_data_downloaders.file_utils import extract_metadata
 from maap_data_downloaders.stac_utils import build_catalog, create_stac_item
 
