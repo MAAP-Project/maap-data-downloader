@@ -98,6 +98,14 @@ $graph:
           If omitted, defaults to the short_name or concept_id value.
           Example: my-gedi-download
 
+      granule_name_pattern:
+        type: string?
+        label: Granule Name Pattern
+        doc: |
+          Optional filename pattern to filter granules at the CMR search level.
+          Useful for selecting a single processing version when a collection
+          has multiple, e.g. '*v02_11*'.
+
       verbose:
         type: boolean?
         default: false
@@ -138,6 +146,7 @@ $graph:
           temporal_end: temporal_end
           limit: limit
           collection_id: collection_id
+          granule_name_pattern: granule_name_pattern
           verbose: verbose
         out: [outputs_result, stac_catalog]
 
@@ -214,6 +223,12 @@ $graph:
         label: STAC Collection ID
         inputBinding:
           prefix: --collection-id
+
+      granule_name_pattern:
+        type: string?
+        label: Granule Name Pattern
+        inputBinding:
+          prefix: --granule-name-pattern
 
       verbose:
         type: boolean?

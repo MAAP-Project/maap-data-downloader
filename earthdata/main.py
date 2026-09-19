@@ -28,6 +28,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="STAC collection ID for output catalog (default: short-name or concept-id)",
     )
     p.add_argument("--output", default="outputs", help="Output directory (default: outputs)")
+    p.add_argument(
+        "--granule-name-pattern",
+        default=None,
+        help="Filename pattern to filter granules at the CMR search level (e.g. '*v02_11*')",
+    )
     p.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     p.add_argument(
         "--auth-strategy",
@@ -60,6 +65,7 @@ def run(args: argparse.Namespace) -> None:
             limit=args.limit,
             collection_id=args.collection_id,
             output_dir=args.output,
+            granule_name_pattern=args.granule_name_pattern,
             auth_strategy=args.auth_strategy,
             token_secret=args.token_secret,
             verbose=args.verbose,
